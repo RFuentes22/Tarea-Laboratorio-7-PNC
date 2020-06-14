@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Listado</title>
+</head>
+<body>
+<h1>Listado de estudiantes</h1>
+<table>
+		<thead>
+			<th>Codigo</th>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Edad</th>
+			<th>Estado</th>
+		</thead>
+		<tr>
+			<th th:text="${estudiante.codigoEstudiante}" />
+			<th th:text="${estudiante.nombre}" />
+			<th th:text="${estudiante.apellido}" />
+			<th th:text="${estudiante.edad}" />
+			<th th:text="${estudiante.estadoDelegate}" />
+		</tr>
+	</table>
+	<form th:action="@{estudiante}">
+		<input type="submit" value="Regresar">
+	</form>
+</body>
+</body>
+</html>

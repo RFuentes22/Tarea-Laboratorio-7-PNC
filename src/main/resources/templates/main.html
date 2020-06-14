@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Lista de estudiantes</title>
+</head>
+<body>
+<h1>Listado de estudiantes</h1>
+	<table>
+		<thead>
+			<th>Codigo</th>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Edad</th>
+			<th>Estado</th>
+		</thead>
+		<th:block th:each="estudiante, row: ${estudiantes}">
+			<tr>
+				<th th:text="${estudiante.codigoEstudiante}" />
+				<th th:text="${estudiante.nombre}" />
+				<th th:text="${estudiante.apellido}" />
+				<th th:text="${estudiante.edad}" />
+				<th th:text="${estudiante.estadoDelegate}" />
+			</tr>
+		</th:block>
+	</table>
+	<form th:action="@{/mostrarEstudiante}" method="post">
+		<label>Buscar por codigo de estudiante: </label><input type="number"
+			name="codigo"><br> <input type="submit" value="Buscar">
+	</form>
+	<form th:action="@{/insertarEstudiante}">
+		<input type="submit" value="Insertar nuevo estudiante">
+	</form><br>
+	<form th:action="@{/filtrar}" method="post">
+		<input type="text" name="nombre"><br>
+		<input type="submit" value="Ingresar la cadena para filtrar">
+	</form><br>
+	<form th:action="@{/borrarEstudiante}" method="post">
+		<label>Borrar estudiante por codigo: </label><input type="number" name="codigo"><br>
+		<input type="submit" value="Borrar">
+	</form><br>
+	
+</body>
+</html>
