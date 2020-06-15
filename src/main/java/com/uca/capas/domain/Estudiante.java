@@ -29,20 +29,20 @@ public class Estudiante {
 	@Size(message="El Campo no debe de tener mas de 30 caracteres",max=30)
 	@NotEmpty(message="El Campo no puede estar vacio")
 	@Column(name="nombre")
-	private String	Nombre;
+	private String	nombre;
 	
 	@Size(message="El Campo no debe de tener mas de 30 caracteres",max=30)
 	@NotEmpty(message="El Campo no puede estar vacio")
 	@Column(name="apellido")
-	private String	Apellido;
+	private String	apellido;
 	
 	@NotNull(message="El Campo no puede estar vacio")
 	@Min(value=18,message="No puede ser menor a 18 años")
 	@Column(name="edad")
-	private Integer Edad;
+	private Integer edad;
 	
 	@Column(name="estado")
-	private Boolean Estado;
+	private Boolean estado;
 	
 	@OneToMany(mappedBy = "estudiante",fetch = FetchType.EAGER)
 	private List<Computadora> computadoras;
@@ -56,35 +56,36 @@ public class Estudiante {
 	public void setCodigoEstudiante(Integer codigoEstudiante) {
 		this.codigoEstudiante = codigoEstudiante;
 	}
+
 	public String getNombre() {
-		return Nombre;
+		return nombre;
 	}
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		this.nombre = nombre;
 	}
 	public String getApellido() {
-		return Apellido;
+		return apellido;
 	}
 	public void setApellido(String apellido) {
-		Apellido = apellido;
+		this.apellido = apellido;
 	}
 	public Integer getEdad() {
-		return Edad;
+		return edad;
 	}
 	public void setEdad(Integer edad) {
-		Edad = edad;
+		this.edad = edad;
 	}
 	public Boolean getEstado() {
-		return Estado;
+		return estado;
 	}
 	public void setEstado(Boolean estado) {
-		Estado = estado;
+		this.estado = estado;
 	}
 	//Delegate
 	public String getEstadoDelegate() {
-		if(this.Estado==null) return "";
+		if(this.estado==null) return "";
 		else {
-			return Estado == true ? "Activo":"Inactivo";
+			return estado == true ? "Activo":"Inactivo";
 		}
 		
 	}

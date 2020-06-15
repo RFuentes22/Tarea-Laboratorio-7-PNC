@@ -28,6 +28,9 @@
 		<label>Buscar por codigo de estudiante: </label><input type="number"
 			name="codigo"><br> <input type="submit" value="Buscar">
 	</form>
+	<form th:action="@{/mostrarDTO}" method="post">
+		<input type="submit" value="Mostrar Name LastName DTO">
+	</form>
 	<form th:action="@{/insertarEstudiante}">
 		<input type="submit" value="Insertar nuevo estudiante">
 	</form><br>
@@ -38,7 +41,9 @@
 	<form th:action="@{/borrarEstudiante}" method="post">
 		<label>Borrar estudiante por codigo: </label><input type="number" name="codigo"><br>
 		<input type="submit" value="Borrar">
-	</form><br>
-	
+	</form><br><br><br>
+	<form th:action="@{/}">
+		<input type="submit" value="Home">
+	</form>
 </body>
 </html>

@@ -2,28 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Mostrar estudiante por llave primaria</title>
+<title>Consulta DTO</title>
 </head>
 <body>
-	<label>Estudiante con codigo</label>
-	<label th:text="${estudiante.codigoEstudiante}"></label>
+<h1>Listado de estudiantesDTO</h1>
 	<table>
 		<thead>
-			<th>Codigo</th>
 			<th>Nombre</th>
 			<th>Apellido</th>
-			<th>Edad</th>
-			<th>Estado</th>
-		</thead>
+		</thead> 
 		<th:block th:each="estudiante, row: ${estudiantes}">
 			<tr>
-				<th th:text="${estudiante.codigoEstudiante}" />
 				<th th:text="${estudiante.nombre}" />
 				<th th:text="${estudiante.apellido}" />
-				<th th:text="${estudiante.edad}" />
-				<th th:text="${estudiante.estadoDelegate}" />
 			</tr>
 		</th:block>
 	</table>
+	<form th:action="@{/}">
+		<input type="submit" value="Regresar">
+	</form>
 </body>
 </html>

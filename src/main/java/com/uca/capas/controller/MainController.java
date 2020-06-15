@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.uca.capas.EstudianteDTO.EstudianteDTO;
 import com.uca.capas.domain.Estudiante;
 import com.uca.capas.service.EstudianteService;
 
@@ -47,28 +49,43 @@ public class MainController {
 			e.printStackTrace();
 		}
 		mav.addObject("estudiante",estudiante);
-		//mav.setViewName("estudiante");
-		mav.setViewName("estudiante2");
+		mav.setViewName("estudiante");
+		//mav.setViewName("estudiante2");
 
 		return mav;
 	}
 	
 	@PostMapping(value = "/filtrar")
-	public ModelAndView filtrar(@RequestParam(value="Nombre") String cadena) {
+	public ModelAndView filtrar(@RequestParam(value="nombre") String cadena) {
 		ModelAndView mav = new ModelAndView();
 		List<Estudiante> estudiantes = null;
 		try {
-			estudiantes = estudianteService.filtrarPor(cadena);
+			//estudiantes = estudianteService.filtrarPor(cadena);
+			//estudiantes = estudianteService.lastnameStartingWith(cadena);
+			estudiantes = estudianteService.findByName(cadena);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		mav.addObject("estudiantes",estudiantes);
-		//mav.setViewName("estudiante");
 		mav.setViewName("main");
 
 		return mav;
-	}
+	} 
 	
+	@PostMapping(value = "/mostrarDTO")
+	public ModelAndView mostrarDTO() {
+		ModelAndView mav = new ModelAndView();
+		List<EstudianteDTO> estudiantes = null;
+		try {
+			estudiantes = estudianteService.showNamLastDTO();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		mav.addObject("estudiantes",estudiantes);
+		mav.setViewName("showDTO");
+
+		return mav;
+	} 
 	@RequestMapping("/save")
 	public ModelAndView guardar(@Valid @ModelAttribute Estudiante estudiante, BindingResult result) throws ParseException {
 		ModelAndView mav = new ModelAndView();
@@ -115,7 +132,8 @@ public class MainController {
 		List<Estudiante> estudiantes = null;
 		
 		try {
-			estudiantes = estudianteService.findAllEstudiante();
+			//estudiantes = estudianteService.findAllEstudiante();
+			estudiantes = estudianteService.showAllStudents();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

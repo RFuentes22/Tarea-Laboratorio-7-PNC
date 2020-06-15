@@ -10,16 +10,16 @@
 <form th:action="@{/save}" method="post" th:object="${estudiante}">
 		
 		<label>Nombre: </label>
-		<input type="text" th:field="*{Nombre}">
-		<span th:errors="*{Nombre}"style="color: #FF0000"></span><br>
+		<input type="text" th:field="*{nombre}">
+		<span th:errors="*{nombre}"style="color: #FF0000"></span><br>
 		
 		<label>Apellido: </label>
-		<input type="text" th:field="*{Apellido}">
-		<span th:errors="*{Apellido}"style="color: #FF0000"></span><br>
+		<input type="text" th:field="*{apellido}">
+		<span th:errors="*{apellido}"style="color: #FF0000"></span><br>
 		
 		<label>Edad (No menor a 18 a&ntilde:os)  : </label>
-		<input type="number" th:field="*{Edad}">
-		<span th:errors="*{Edad}"style="color: #FF0000"></span><br>
+		<input type="number" th:field="*{edad}">
+		<span th:errors="*{edad}"style="color: #FF0000"></span><br>
 		
 		<label>Activo: </label>
 		<input type="radio" th:field="*{estado}" th:value="${true}">
