@@ -43,10 +43,10 @@ public class Estudiante {
 	
 	@Column(name="estado")
 	private Boolean estado;
-	
+	/*
 	@OneToMany(mappedBy = "estudiante",fetch = FetchType.EAGER)
 	private List<Computadora> computadoras;
-	
+	*/
 	public Estudiante(){
 		
 	}
@@ -89,12 +89,13 @@ public class Estudiante {
 		}
 		
 	}
+	/*
 	public List<Computadora> getComputadoras() {
 		return computadoras;
 	}
 	public void setComputadoras(List<Computadora> computadoras) {
 		this.computadoras = computadoras;
-	}
+	}*/
 
 	
 

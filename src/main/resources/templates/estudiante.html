@@ -6,7 +6,7 @@
 </head>
 <body>
 	<label>Estudiante con codigo</label>
-	<label th:text="${estudiante.codigoEstudiante}"></label>
+	<label th:text="${estudiantes.codigoEstudiante}"></label>
 	<table>
 		<thead>
 			<th>Codigo</th>
@@ -25,5 +25,8 @@
 			</tr>
 		</th:block>
 	</table>
+	<form th:action="@{/}">
+		<input type="submit" value="Regresar">
+	</form>
 </body>
 </html>

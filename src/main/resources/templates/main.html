@@ -24,10 +24,13 @@
 			</tr>
 		</th:block>
 	</table>
-	<form th:action="@{/mostrarEstudiante}" method="post">
-		<label>Buscar por codigo de estudiante: </label><input type="number"
-			name="codigo"><br> <input type="submit" value="Buscar">
+	<form th:action="@{/mostrarEstudianteoedit}" method="post">
+		<label>Buscar o editar por codigo de estudiante: </label>
+		<input type="number" name="codigo"><br>
+		<button type="submit" name="action" value="buscar">Buscar</button>
+		<button type="submit" name="action" value="editar">Editar</button>
 	</form>
+	<br>
 	<form th:action="@{/mostrarDTO}" method="post">
 		<input type="submit" value="Mostrar Name LastName DTO">
 	</form>

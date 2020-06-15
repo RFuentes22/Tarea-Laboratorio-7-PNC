@@ -24,4 +24,5 @@ public interface EstudianteRepository extends JpaRepository<Estudiante, Integer>
 	
 	@Query(nativeQuery=true, value="select nombre,apellido from public.estudiante")
 	public List<Object[]> mostrarSoloNombApelPruebaDTO() throws DataAccessException;
+
 }

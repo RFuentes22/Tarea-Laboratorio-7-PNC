@@ -20,125 +20,142 @@ import com.uca.capas.service.EstudianteService;
 
 @Controller
 public class MainController {
-	
+
 	@Autowired
 	private EstudianteService estudianteService;
-	
-	//Show students list
+
+	// Show students list
 	@RequestMapping("/")
 	public ModelAndView initMain() {
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("estudiantes",listEstudiantes());
+
+		mav.addObject("estudiantes", listEstudiantes());
 		mav.setViewName("main");
-		//mav.setViewName("main2");
-		
+		// mav.setViewName("main2");
+
 		return mav;
-		
-		 
+
 	}
-	
-	//Show student by id
-	@RequestMapping(value = "/mostrarEstudiante",method = RequestMethod.POST)
-	public ModelAndView findOne(@RequestParam(value="codigo") int id) {
+
+	// Show student by id
+	@PostMapping(value = "/mostrarEstudianteoedit",params="action=buscar")
+	public ModelAndView findOne(@RequestParam(value = "codigo") int id) {
 		ModelAndView mav = new ModelAndView();
 		Estudiante estudiante = null;
 		try {
 			estudiante = estudianteService.findOne(id);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mav.addObject("estudiante",estudiante);
+		mav.addObject("estudiantes", estudiante);
 		mav.setViewName("estudiante");
-		//mav.setViewName("estudiante2");
+		// mav.setViewName("estudiante2");
 
 		return mav;
 	}
+
+	@PostMapping(value = "/mostrarEstudianteoedit",params="action=editar")
+	public ModelAndView editar(@RequestParam(value = "codigo") int id) {
+		ModelAndView mav = new ModelAndView();
+		Estudiante estudiante = null;
+		try {
+			estudiante = estudianteService.findOne(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.addObject("estudiante", estudiante);
+		mav.setViewName("editEstudiante");
+		// mav.setViewName("estudiante2");
+		return mav;
+	}
+	
+	@RequestMapping("/save")
+	public ModelAndView guardar(@Valid @ModelAttribute Estudiante estudiante, BindingResult result)
+			throws ParseException {
+		ModelAndView mav = new ModelAndView();
+
+		if (result.hasErrors()) {
+			mav.setViewName("agregarEstudiante");
+			mav.addObject("estudiante ", estudiante);
+			// System.out.println(result.getAllErrors());
+		} else {
+			estudianteService.save(estudiante);
+			mav.addObject("estudiantes ", listEstudiantes());
+			mav.setViewName("listaEstudiantes");
+		}
+
+		return mav;
+	}
+
+	
 	
 	@PostMapping(value = "/filtrar")
-	public ModelAndView filtrar(@RequestParam(value="nombre") String cadena) {
+	public ModelAndView filtrar(@RequestParam(value = "nombre") String cadena) {
 		ModelAndView mav = new ModelAndView();
 		List<Estudiante> estudiantes = null;
 		try {
-			//estudiantes = estudianteService.filtrarPor(cadena);
-			//estudiantes = estudianteService.lastnameStartingWith(cadena);
+			// estudiantes = estudianteService.filtrarPor(cadena);
+			// estudiantes = estudianteService.lastnameStartingWith(cadena);
 			estudiantes = estudianteService.findByName(cadena);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mav.addObject("estudiantes",estudiantes);
+		mav.addObject("estudiantes", estudiantes);
 		mav.setViewName("main");
 
 		return mav;
-	} 
-	
+	}
+
 	@PostMapping(value = "/mostrarDTO")
 	public ModelAndView mostrarDTO() {
 		ModelAndView mav = new ModelAndView();
 		List<EstudianteDTO> estudiantes = null;
 		try {
 			estudiantes = estudianteService.showNamLastDTO();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mav.addObject("estudiantes",estudiantes);
+		mav.addObject("estudiantes", estudiantes);
 		mav.setViewName("showDTO");
 
 		return mav;
-	} 
-	@RequestMapping("/save")
-	public ModelAndView guardar(@Valid @ModelAttribute Estudiante estudiante, BindingResult result) throws ParseException {
-		ModelAndView mav = new ModelAndView();
-		
-		if (result.hasErrors()) {
-			mav.setViewName("agregarEstudiante");
-			mav.addObject("estudiante ",estudiante);
-			//System.out.println(result.getAllErrors());
-		}else {
-			estudianteService.save(estudiante);
-			mav.addObject("estudiantes ",listEstudiantes());
-			mav.setViewName("listaEstudiantes");
-		}
-		
-		return mav;
 	}
+
 	
-	@RequestMapping(value = "/borrarEstudiante",method = RequestMethod.POST)
-	public ModelAndView delete(@RequestParam(value="codigo") int id) throws ParseException {
+
+	@RequestMapping(value = "/borrarEstudiante", method = RequestMethod.POST)
+	public ModelAndView delete(@RequestParam(value = "codigo") int id) throws ParseException {
 		ModelAndView mav = new ModelAndView();
-		
-		
+
 		estudianteService.delete(id);
-		mav.addObject("estudiantes",listEstudiantes());
+		mav.addObject("estudiantes", listEstudiantes());
 		mav.setViewName("main");
-		
+
 		return mav;
-		
+
 	}
-	
+
 	@GetMapping("/insertarEstudiante")
 	public ModelAndView inicio() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("estudiante",new Estudiante());
+		mav.addObject("estudiante", new Estudiante());
 		mav.setViewName("agregarEstudiante");
-		
+
 		return mav;
 	}
-	
-	
-	public List<Estudiante> listEstudiantes(){
-		
-		
+
+	public List<Estudiante> listEstudiantes() {
+
 		List<Estudiante> estudiantes = null;
-		
+
 		try {
-			//estudiantes = estudianteService.findAllEstudiante();
+			// estudiantes = estudianteService.findAllEstudiante();
 			estudiantes = estudianteService.showAllStudents();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return estudiantes;
 	}
-	 
+
 }
